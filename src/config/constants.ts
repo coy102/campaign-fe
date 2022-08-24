@@ -1,3 +1,18 @@
+export const SORT_LIST_OPTIONS = [
+  {
+    label: 'All',
+    value: '',
+  },
+  {
+    label: 'Donation',
+    value: 'donation_received',
+  },
+  {
+    label: 'Day left',
+    value: 'days_remaining',
+  },
+]
+
 const META = {
   image: '',
   rootUrl: 'https://example.com',

@@ -1,15 +1,34 @@
-import { useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
+import { SORT_LIST_OPTIONS } from '~/config/constants'
 import { useGetCampaignList } from '~/services/hooks/campaign'
+
+import { constructSortedList } from './helper'
 
 const useCustom = () => {
   const { data } = useGetCampaignList()
 
-  const memoCampaign = useMemo(() => data?.response?.data || [], [data])
+  const [sortBy, setSortBy] = useState(SORT_LIST_OPTIONS[0].value)
+
+  // Memo campaign list
+  const memoCampaign = useMemo(
+    () => constructSortedList(data?.response?.data, sortBy) || [],
+    [data, sortBy]
+  )
+
+  // Handle change sort option
+  const handleChangeSort = useCallback((e) => {
+    setSortBy(e.target.value)
+  }, [])
 
   return {
-    loading: data.loading,
-    memoCampaign,
+    data: {
+      loading: data.loading,
+      memoCampaign,
+    },
+    methods: {
+      handleChangeSort,
+    },
   }
 }
 
