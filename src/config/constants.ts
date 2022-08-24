@@ -1,3 +1,5 @@
+import { IMG_BRAND } from './image'
+
 export const SORT_LIST_OPTIONS = [
   {
     label: 'Relevant',
@@ -16,19 +18,20 @@ export const SORT_LIST_OPTIONS = [
 const META = {
   image: '',
   rootUrl: 'https://example.com',
-  title: 'Campaign list',
-  description: 'Default description',
+  title: 'Kitabisa.com - Fundraising platform',
+  description: 'Situs donasi dan menggalang dana (fundraising)',
+  keywords: 'Donasi online, Sedekah, Zakat',
 }
 
-export const META_TAGS = {
+export const DEFAULT_META_TAGS = {
   ...META,
   metaTags: [
     { name: 'og:title', content: META.title },
-    { name: 'og:url', content: 'https://example.com' },
-    { name: 'og:image', content: '' },
+    { name: 'og:image', content: IMG_BRAND.META_ICON },
+    { name: 'og:description', content: META.description },
     {
       name: 'og:site_name',
-      content: META.title,
+      content: 'Kitabisa',
     },
   ],
 }
