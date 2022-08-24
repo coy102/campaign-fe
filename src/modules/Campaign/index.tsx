@@ -21,13 +21,23 @@ const Campaign = () => {
       />
       <Grid mt={5} data-testid="campaign-card-list" spacing={5} container>
         {data.memoCampaign.map(
-          ({ days_remaining, id, image, title, donation_received }) => (
+          ({
+            campaigner,
+            days_remaining,
+            donation_received,
+            id,
+            image,
+            title,
+            campaigner_is_verified,
+          }) => (
             <Grid lg={4} md={4} xs={12} sm={12} key={id} item>
               <CardItem
+                campaigner={campaigner}
                 donation={donation_received}
                 coverSrc={image}
                 title={title}
                 dayLeft={days_remaining}
+                verified={campaigner_is_verified}
               />
             </Grid>
           )

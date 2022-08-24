@@ -1,3 +1,5 @@
+import { FamilyRestroomRounded } from '@mui/icons-material'
+
 export const defaultConfig = {
   method: 'GET',
   url: '/campaign.json',
@@ -34,7 +36,7 @@ export const responseData = {
         campaigner_type: 'PERSONAL',
         campaigner_badge:
           'https://assets.kitabisa.com/images/icon__verified-user.svg',
-        campaigner_is_verified: true,
+        campaigner_is_verified: FamilyRestroomRounded,
         category_name: 'Bencana Alam',
         is_forever_running: false,
         is_open_goal: false,

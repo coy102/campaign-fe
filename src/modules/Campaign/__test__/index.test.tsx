@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, within } from '@testing-library/react'
 import React from 'react'
 
 import { mockedAxiosCallback, mockedUseAxios } from '~/mocks/services/useAxios'
@@ -40,12 +40,22 @@ describe('<Campaign />', () => {
     expect(cardItemList).toHaveLength(2)
 
     expect(cardContainer).toBeInTheDocument()
-    expect(cardContainer.children.item(0).textContent).toEqual(
+    expect(cardContainer.children.item(0).textContent).toContain(
       'Bantu Korban Gempa dan Tsunami Palu-Donggala'
     )
-    expect(cardContainer.children.item(1).textContent).toEqual(
+    expect(cardContainer.children.item(1).textContent).toContain(
       '#BisaBangkit Bersama Kitabisa'
     )
+
+    cardItemList.forEach((item, i) => {
+      const { queryByTestId } = within(item)
+
+      if (responseData.response.data[i].campaigner_is_verified) {
+        expect(queryByTestId('verified-icon')).toBeInTheDocument()
+      } else {
+        expect(queryByTestId('verified-icon')).not.toBeInTheDocument()
+      }
+    })
 
     expect(campaignContainer.queryByTestId('loading')).not.toBeInTheDocument()
   })
@@ -61,10 +71,11 @@ describe('<Campaign />', () => {
     const cardItemList = campaignContainer.getAllByRole('listitem')
 
     expect(cardContainer).toBeInTheDocument()
-    expect(cardContainer.children.item(0).textContent).toEqual(
+
+    expect(cardContainer.children.item(0).textContent).toContain(
       '#BisaBangkit Bersama Kitabisa'
     )
-    expect(cardContainer.children.item(1).textContent).toEqual(
+    expect(cardContainer.children.item(1).textContent).toContain(
       'Bantu Korban Gempa dan Tsunami Palu-Donggala'
     )
 
