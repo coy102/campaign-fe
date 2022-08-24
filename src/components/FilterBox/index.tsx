@@ -1,12 +1,11 @@
 import React, { memo } from 'react'
 
-import { MenuItem, TextField } from '@mui/material'
+import { MenuItem, styled, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import uniqid from 'uniqid'
 
 import { SORT_LIST_OPTIONS } from '~/config/constants'
 import { IMG_BRAND } from '~/config/image'
-import { fontSize } from '~/styles/theme'
 
 import StyledImage from '../StyledImage'
 
@@ -15,21 +14,33 @@ interface Props {
   handleChangeSortBy: (e) => void
 }
 
+const WrapperBox = styled(Box)(
+  {
+    display: 'flex',
+  },
+  ({ theme }) => ({
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+    },
+  })
+)
+
 const FilterBox = ({ sortBy, handleChangeSortBy }: Props) => (
-  <Box my={5} data-testid="filter-box" display="flex" alignItems="center">
-    <Box>
+  <WrapperBox my={5} data-testid="filter-box">
+    <Box flexGrow={1} mb={2}>
       <StyledImage
         loader={() => IMG_BRAND.BRAND_LOGO}
         src={IMG_BRAND.BRAND_LOGO}
-        width={100}
-        height="100%"
-        unoptimized
+        width={80}
+        height={80}
       />
     </Box>
-    <Box fontSize={fontSize[32]} ml={5} fontWeight="bold">
-      Kitabisa
-    </Box>
-    <Box flexGrow={1} textAlign="right">
+
+    <Box>
       <TextField
         label="Sort by"
         variant="outlined"
@@ -39,6 +50,7 @@ const FilterBox = ({ sortBy, handleChangeSortBy }: Props) => (
           'data-testid': 'select-sort-by',
         }}
         select
+        fullWidth
       >
         {SORT_LIST_OPTIONS.map((opt) => (
           <MenuItem key={uniqid()} value={opt.value}>
@@ -47,7 +59,7 @@ const FilterBox = ({ sortBy, handleChangeSortBy }: Props) => (
         ))}
       </TextField>
     </Box>
-  </Box>
+  </WrapperBox>
 )
 
 export default memo(FilterBox)

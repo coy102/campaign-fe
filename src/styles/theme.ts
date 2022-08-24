@@ -28,6 +28,15 @@ const theme = createTheme({
       primary: '#4a4a4a',
     },
   },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   typography: {
     htmlFontSize: 14,
     fontSize: 14,
