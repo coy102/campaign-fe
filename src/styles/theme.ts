@@ -9,6 +9,7 @@ export const fontSize = {
   16: '1rem',
   18: '1.125rem',
   20: '1.25rem',
+  32: '2rem',
 }
 
 // Create a theme instance.
