@@ -20,11 +20,18 @@ const Campaign = () => {
         sortBy={data.sortBy}
       />
       <Grid mt={5} data-testid="campaign-card-list" spacing={5} container>
-        {data.memoCampaign.map(({ id, image, title }) => (
-          <Grid lg={4} md={4} xs={12} sm={12} key={id} item>
-            <CardItem coverSrc={image} title={title} />
-          </Grid>
-        ))}
+        {data.memoCampaign.map(
+          ({ days_remaining, id, image, title, donation_received }) => (
+            <Grid lg={4} md={4} xs={12} sm={12} key={id} item>
+              <CardItem
+                donation={donation_received}
+                coverSrc={image}
+                title={title}
+                dayLeft={days_remaining}
+              />
+            </Grid>
+          )
+        )}
       </Grid>
     </Box>
   )
