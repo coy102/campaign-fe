@@ -1,6 +1,6 @@
 export const SORT_LIST_OPTIONS = [
   {
-    label: 'All',
+    label: 'Relevant',
     value: 'order',
   },
   {
