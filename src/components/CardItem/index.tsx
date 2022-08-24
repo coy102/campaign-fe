@@ -1,10 +1,12 @@
 import React, { memo } from 'react'
 
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircle'
 import { Box, Tooltip, Typography } from '@mui/material'
 
 import { fontSize } from '~/styles/theme'
 
+import ProgressBar from '../ProgressBar'
 import StyledImage from '../StyledImage'
 
 interface Props {
@@ -12,6 +14,8 @@ interface Props {
   coverSrc: string
   dayLeft: number
   donation: number
+  donationPercentage: number
+  isForever: boolean
   verified: boolean
   title: string
 }
@@ -21,6 +25,8 @@ const CardItem = ({
   coverSrc,
   dayLeft,
   donation,
+  donationPercentage,
+  isForever,
   title,
   verified,
 }: Props) => (
@@ -55,6 +61,13 @@ const CardItem = ({
       )}
     </Box>
 
+    <Box width="100%">
+      <ProgressBar
+        value={donationPercentage > 100 ? 100 : donationPercentage}
+        variant="determinate"
+      />
+    </Box>
+
     <Box mt={2} display="flex" justifyContent="space-between">
       <Box>
         <Typography mb={1} fontSize={fontSize[12]}>
@@ -64,13 +77,17 @@ const CardItem = ({
           Rp {Number(donation).toLocaleString()}
         </Typography>
       </Box>
-      <Box>
+      <Box textAlign="right">
         <Typography mb={1} fontSize={fontSize[12]}>
           Sisa Hari
         </Typography>
-        <Typography fontSize={fontSize[12]} fontWeight="bold">
-          {dayLeft}
-        </Typography>
+        {isForever ? (
+          <AllInclusiveIcon fontSize="inherit" />
+        ) : (
+          <Typography fontSize={fontSize[12]} fontWeight="bold">
+            {dayLeft}
+          </Typography>
+        )}
       </Box>
     </Box>
   </Box>

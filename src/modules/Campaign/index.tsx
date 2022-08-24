@@ -25,8 +25,10 @@ const Campaign = () => {
             campaigner,
             days_remaining,
             donation_received,
+            donation_target,
             id,
             image,
+            is_forever_running,
             title,
             campaigner_is_verified,
           }) => (
@@ -34,7 +36,9 @@ const Campaign = () => {
               <CardItem
                 campaigner={campaigner}
                 donation={donation_received}
+                donationPercentage={(100 * donation_received) / donation_target}
                 coverSrc={image}
+                isForever={is_forever_running}
                 title={title}
                 dayLeft={days_remaining}
                 verified={campaigner_is_verified}
