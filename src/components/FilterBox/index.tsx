@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import React, { memo } from 'react'
 
 import { Box } from '@mui/system'
 
@@ -15,7 +15,7 @@ const FilterBox = () => (
         src={IMG_BRAND.BRAND_LOGO}
         width={100}
         height="100%"
-        rounded
+        unoptimized
       />
     </Box>
     <Box fontSize={fontSize[32]} ml={5} fontWeight="bold">

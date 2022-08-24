@@ -1,17 +1,9 @@
 import styled from '@emotion/styled'
 import Image from 'next/image'
 
-interface Props {
-  rounded?: boolean
-}
-
-const StyledImage = styled(Image)<Props>(
-  {
-    objectFit: 'cover',
-  },
-  ({ rounded = false }) => ({
-    borderRadius: rounded ? 10 : 0,
-  })
-)
+const StyledImage = styled(Image)({
+  objectFit: 'cover',
+  borderRadius: 10,
+})
 
 export default StyledImage

@@ -11,6 +11,12 @@ export const errorResponseData = {
   },
 }
 
+export const loadingResponseData = {
+  response: undefined,
+  error: '',
+  loading: true,
+}
+
 export const responseData = {
   response: {
     data: [

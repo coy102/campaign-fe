@@ -24,6 +24,9 @@ const theme = createTheme({
     error: {
       main: red.A400,
     },
+    text: {
+      primary: '#4a4a4a',
+    },
   },
   typography: {
     htmlFontSize: 14,
