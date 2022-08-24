@@ -11,7 +11,7 @@ interface Props {
 }
 
 const CardItem = ({ coverSrc, title }: Props) => (
-  <Box mb={5} display="flex" flexDirection="column">
+  <Box role="listitem" mb={5} display="flex" flexDirection="column">
     <StyledImage
       loader={() => coverSrc}
       src={coverSrc}

@@ -1,7 +1,7 @@
 export const SORT_LIST_OPTIONS = [
   {
     label: 'All',
-    value: '',
+    value: 'order',
   },
   {
     label: 'Donation',

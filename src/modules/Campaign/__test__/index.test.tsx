@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
 
 import { mockedAxiosCallback, mockedUseAxios } from '~/mocks/services/useAxios'
@@ -11,8 +11,6 @@ import {
 jest.mock('~/services/useAxios', () => mockedUseAxios)
 
 describe('<Campaign />', () => {
-  afterEach(jest.clearAllMocks)
-
   it('should render loading at the firstime', () => {
     mockedUseAxios.mockImplementationOnce(() => ({
       axiosCallback: mockedAxiosCallback,
@@ -25,9 +23,6 @@ describe('<Campaign />', () => {
     expect(
       campaignContainer.queryByTestId('campaign-card-list')
     ).not.toBeInTheDocument()
-    expect(
-      campaignContainer.queryByTestId('item-94597')
-    ).not.toBeInTheDocument()
   })
 
   it('should render when campaign is not empty', () => {
@@ -38,10 +33,43 @@ describe('<Campaign />', () => {
 
     const campaignContainer = render(<Campaign />)
 
-    expect(
-      campaignContainer.queryByTestId('campaign-card-list')
-    ).toBeInTheDocument()
+    const cardContainer = campaignContainer.queryByTestId('campaign-card-list')
+    const cardItemList = campaignContainer.getAllByRole('listitem')
+
+    expect(cardContainer).toBeInTheDocument()
+    expect(cardItemList).toHaveLength(2)
+
+    expect(cardContainer).toBeInTheDocument()
+    expect(cardContainer.children.item(0).textContent).toEqual(
+      'Bantu Korban Gempa dan Tsunami Palu-Donggala'
+    )
+    expect(cardContainer.children.item(1).textContent).toEqual(
+      '#BisaBangkit Bersama Kitabisa'
+    )
+
     expect(campaignContainer.queryByTestId('loading')).not.toBeInTheDocument()
-    expect(campaignContainer.queryByTestId('item-94597')).toBeInTheDocument()
+  })
+
+  it('should render sorted by Days Left', () => {
+    const campaignContainer = render(<Campaign />)
+
+    const selectInput = campaignContainer.getByTestId('select-sort-by')
+    fireEvent.change(selectInput, { target: { value: 'days_remaining' } })
+    expect((selectInput as any).value).toBe('days_remaining')
+
+    const cardContainer = campaignContainer.queryByTestId('campaign-card-list')
+    const cardItemList = campaignContainer.getAllByRole('listitem')
+
+    expect(cardContainer).toBeInTheDocument()
+    expect(cardContainer.children.item(0).textContent).toEqual(
+      '#BisaBangkit Bersama Kitabisa'
+    )
+    expect(cardContainer.children.item(1).textContent).toEqual(
+      'Bantu Korban Gempa dan Tsunami Palu-Donggala'
+    )
+
+    expect(cardItemList).toHaveLength(2)
+
+    expect(campaignContainer.queryByTestId('loading')).not.toBeInTheDocument()
   })
 })

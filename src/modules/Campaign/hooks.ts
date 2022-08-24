@@ -25,6 +25,7 @@ const useCustom = () => {
     data: {
       loading: data.loading,
       memoCampaign,
+      sortBy,
     },
     methods: {
       handleChangeSort,

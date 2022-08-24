@@ -9,24 +9,19 @@ import Loading from '~/components/Loading'
 import useCustom from './hooks'
 
 const Campaign = () => {
-  const { data } = useCustom()
+  const { data, methods } = useCustom()
 
   if (data.loading) return <Loading />
 
   return (
     <Box>
-      <FilterBox />
+      <FilterBox
+        handleChangeSortBy={methods.handleChangeSort}
+        sortBy={data.sortBy}
+      />
       <Grid mt={5} data-testid="campaign-card-list" spacing={5} container>
         {data.memoCampaign.map(({ id, image, title }) => (
-          <Grid
-            data-testid={`item-${id}`}
-            lg={4}
-            md={4}
-            xs={12}
-            sm={12}
-            key={id}
-            item
-          >
+          <Grid lg={4} md={4} xs={12} sm={12} key={id} item>
             <CardItem coverSrc={image} title={title} />
           </Grid>
         ))}
